@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { DecimalDown } from "@/commonJs/CheckRule.js"
 export default {
   name: 'HelloWorld',
   data () {
@@ -12,6 +13,7 @@ export default {
     }
   },
   mounted() {
+    console.log("向下取整===》", DecimalDown('1.2345', 2))
   },
   methods: {
   }

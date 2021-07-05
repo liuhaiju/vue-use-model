@@ -1,17 +1,14 @@
-// 高经度计算
-import {Decimal} from 'decimal.js';
-Decimal.set({ toExpNeg: -10 });
-
 // ====================公共方法======================
 import { Multiplication,division } from "@/commonJs/countRules.js"
 
-// 数值向上取整到百位
-function roundToHundreds(num) {
-    let value = division(num,100).toString()
+// 数值向上取整到X位
+function ArrangementRise(num_value, num_digits) {
+    let value = division(num_value,num_digits).toString()
     value = Math.ceil(value)
-    value = Multiplication(value,100)
+    value = Multiplication(value,num_digits)
     return value
 }
+
 // 输入整数的长度校验，限制整数位的长度
 function ntegerCheck(newName,num) {
     if(newName.split('.')[0] != undefined) {
@@ -29,6 +26,7 @@ function ntegerCheck(newName,num) {
         return newName
     }
 }
+
 // 保留小数位向下取整
 // value:要计算的值，Digit:保留的位数
 function DecimalDown(value,Digit) {
@@ -41,7 +39,7 @@ function DecimalDown(value,Digit) {
             } else {
                 newName = newName.split('.')[0]+"."+c
             }
-            return new Decimal(newName).toString()
+            return newName
         } else {
             return newName
         }
@@ -49,18 +47,19 @@ function DecimalDown(value,Digit) {
         return newName
     }
 }
+
 //  向上取整，val值，digit精度
 function liandongDigits(val,digit) {
-    // val = val.toString();
     let endVal = '';
     // 10的精度次幂
     digit = Math.pow(10,digit)
     // 处理过的数字
-    let newNum = new Decimal(val).mul(new Decimal(digit))
-    // console.log(val,new Decimal(digit),newNum)
-    endVal = new Decimal(Math.ceil(newNum)).div(new Decimal(digit)).toString()
+    let newNum = Multiplication(val, digit)
+    endVal = division(Math.ceil(newNum), digit)
     return endVal
 }
+
+
 //校验传入的字符串，指允许输入数字、小数点，[开关控制是否可以输入正负号,true可以，false不可以]
 function inputTextCheck(newName,isCanInputNegative) {
     newName = newName.toString()
@@ -105,8 +104,6 @@ function inputTextCheck(newName,isCanInputNegative) {
     }
     return newName
 }
-// 只能输入整数
-// function inputNumber
 
 // 字符串限制长度
 function stringLimitLength(get_string,input_length) {
@@ -114,7 +111,7 @@ function stringLimitLength(get_string,input_length) {
     return get_new_string
 }
 
-// numbet类型，只能输入整数，oninput阶段使用
+// number类型，只能输入整数，oninput阶段使用
 function intValidator(value,input_length){
     value = value.replace(/\D+/, "");
     if(value.length > 0){
@@ -132,11 +129,11 @@ function intValidator(value,input_length){
 }
 
 export {
+    ArrangementRise,
     ntegerCheck,
     DecimalDown,
     liandongDigits,
     inputTextCheck,
-    roundToHundreds,
     stringLimitLength,
     intValidator
 }

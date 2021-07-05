@@ -1,5 +1,6 @@
 // 引入时间戳工具
 import moment from 'moment'
+
 // 记算时间时，分，秒函数方法
 function CalculationTime(longTime,shortTime) {
     let time = Number(longTime) - Number(shortTime)
@@ -32,6 +33,7 @@ function CalculationTime(longTime,shortTime) {
     }
     return params
 }
+
 // 定时器
 function Timer(bigTime,littleTime,callback) {
     let times = littleTime
@@ -55,6 +57,7 @@ function Timer(bigTime,littleTime,callback) {
         }
     },1000)
 }
+
 // 时间戳转换工具，需引入moment工具才可使用[timeValue是必传值，时间戳的数；weishu解析时间戳的位数]
 function Timestamp(timeValue,timeFormatValue,weishu) {
     let ConversionValue
@@ -165,31 +168,6 @@ function moreThanTheCurrentTime(compare_time) {
         return false
     }
 }
-// 时间戳转换
-function zhuanhuan(sjtime) {
-    // let now = new Date(sjtime * 1000);
-    // let   year=now.getFullYear();    
-    // let   month=now.getMonth()+1;    
-    // let   date=now.getDate();    
-    // let   hour=now.getHours();    
-    // let   minute=now.getMinutes();    
-    // let   second=now.getSeconds(); 
-    // if(hour < 10) {
-    //   hour = '0' + hour;
-    //   return   year+"-"+month+"-"+date+"   "+hour+":"+minute+":"+second;
-    // } 
-    // if(minute < 10) {
-    //   minute = '0' + minute;
-    //   return   year+"-"+month+"-"+date+"   "+hour+":"+minute+":"+second;
-    // } 
-    // if(second < 10) {
-    //   second = '0' + second;
-    //   return   year+"-"+month+"-"+date+"   "+hour+":"+minute+":"+second;
-    // } 
-    // return   year+"-"+month+"-"+date+"   "+hour+":"+minute+":"+second;
-    let ConversionValue = moment.unix(Number(sjtime)).format('YYYY-MM-DD HH:mm:ss')
-    return ConversionValue
-  }
 
 export {
     CalculationTime,
